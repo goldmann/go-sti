@@ -120,7 +120,7 @@ FROM {{.BaseImage}}
 ADD ./src /tmp/src/
 {{if .User}}RUN chown -R {{.User}}:{{.User}} /tmp/src && chmod -R 755 /tmp/src{{end}}
 {{if .Incremental}}ADD ./artifacts /tmp/artifacts{{end}}
-{{if .User}}RUN chown -R {{.User}}:{{.User}} /tmp/artifacts && chmod -R 755 /tmp/artifacts{{end}}
+{{if .User}}RUN mkdir /tmp/artifacts && chown -R {{.User}}:{{.User}} /tmp/artifacts && chmod -R 755 /tmp/artifacts{{end}}
 {{if .User}}USER {{.User}}{{end}}
 {{range $key, $value := .Environment}}ENV {{$key}} {{$value}}{{end}}
 RUN /usr/bin/prepare
